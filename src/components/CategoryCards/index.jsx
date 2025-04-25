@@ -22,12 +22,12 @@ export default function CategoryCards() {
   }, [])
 
   return (
-    <div className="py-12 pl-28">
+    <div className="py-12">
       <h2 className="text-2xl font-bold">
         Pesquise por categoria
       </h2>
       <div className="relative">
-        <button onClick={() => scroll(-600)} className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md p-2 rounded-full">
+        <button onClick={() => scroll(-600)} className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md p-2 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-black hover:text-white">
           <ChevronLeft />
         </button>
         <div className="overflow-x-auto space-x-4 px-8 py-2 scroll-smooth" ref={scrollRef}>
@@ -44,7 +44,7 @@ export default function CategoryCards() {
             })}
           </ul>
         </div>
-        <button onClick={() => scroll(600)} className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md p-2 rounded-full">
+        <button onClick={() => scroll(600)} className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white shadow-md p-2 rounded-full cursor-pointer transition-all duration-300 ease-in-out hover:bg-black hover:text-white">
           <ChevronRight />
         </button>
       </div>
