@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Star } from "lucide-react"
+import { Star, StarHalf, StarOff } from "lucide-react"
 
 export default function NewArrivals() {
   const [products, setProducts] = useState([])
@@ -19,6 +19,27 @@ export default function NewArrivals() {
     setProducts(selectProduct)
   }
 
+  function renderStars(rating) {
+    const stars = []
+    const fullStars = Math.floor(rating)
+    const hasHalfStar = rating % 1 >= 0.5
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<Star key={`full-${i}`} size={12} className="text-yellow-500" />)
+    }
+
+    if (hasHalfStar) {
+      stars.push(<StarHalf key="half" size={12} className="text-yellow-500" />)
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<StarOff key={`empty-${i}`} size={12} className="text-gray-300" />)
+    }
+
+    return stars
+  }
+
   useEffect(() => {
     getProducts()
   }, [])
@@ -32,10 +53,14 @@ export default function NewArrivals() {
         {products && products.map((item) => (
           <li key={item.title} className="p-4 bg-[#F6F6F6] rounded-xl flex flex-col items-center justify-center gap-4 cursor-pointer transition-all duration-300 shadow-lg hover:scale-105 hover:shadow-lg">
             <img src={item.thumbnail} alt="Image Product" className="h-44 object-container" />
-            <p className="text-sm tracking-wider">{item.title}</p>
+            <p className="text-sm tracking-wider">
+              {item.title}
+            </p>
             <div className="flex items-center w-full gap-2">
-              <Star size={14} className="text-yellow-500 font-bold" />
-              <p className="text-sm">{item.rating}<span className="font-light text-gray-600">/5</span></p>
+              {renderStars(item.rating)}
+              <p className="text-sm">
+                {item.rating.toFixed(1)}<span className="font-light text-gray-600">/5</span>
+              </p>
             </div>
             <div className={`flex items-center gap-8 w-full ${item.price > 70 ? 'justify-end flex-row-reverse' : ''}`}>
               <p className={`${item.price > 70 ? 'text-xs bg-[#ff333339] text-red-400 font-bold p-1 rounded-full' : 'hidden'}`}>
