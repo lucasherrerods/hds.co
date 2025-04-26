@@ -15,7 +15,26 @@ export default function CategoryCards() {
   }
 
   const scroll = (offset) => {
-    scrollRef.current?.scrollBy({ left: offset, behavior: 'smooth' })
+    const scroll = scrollRef.current
+    const startScroll = scroll.scrollLeft
+    const endScroll = startScroll + offset
+    const duration = 300
+    const startTime = performance.now()
+
+    //Função para atualizar a posição do scroll durante a animação
+    const animateScroll = (currentTime) => {
+      const timeElaps = currentTime - startTime
+      const progress = Math.min(timeElaps / duration, 1) //Garante que o progresso não ultrapasse de 100%
+      const scrollPosition = startScroll + (endScroll - startScroll) * progress
+
+      scroll.scrollLeft = scrollPosition
+
+      //Se o progresso ainda não atingiu 100%, continua a animação
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll)
+      }
+    }
+    requestAnimationFrame(animateScroll)
   }
 
   useEffect(() => {
