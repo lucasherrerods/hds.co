@@ -59,7 +59,7 @@ export default function CategoryCards() {
 
                 return (
                   <li key={item.name}>
-                    <Link to={`/products/${item.name.toLowerCase()}`} className="p-4 bg-gray-200 w-40 h-32 rounded-lg flex flex-col items-center justify-center gap-2 cursor-pointer transition-all duration-300 shadow-xs hover:scale-105 hover:shadow-lg">
+                    <Link to={`/products/${item.name.toLowerCase().replace(/\s+/g, '-')}`} className="p-4 bg-gray-200 w-40 h-32 rounded-lg flex flex-col items-center justify-center gap-2 cursor-pointer transition-all duration-300 shadow-xs hover:scale-105 hover:shadow-lg">
                       <Icon size={24} />
                       <p className="text-center">{item.name}</p>
                     </Link>
