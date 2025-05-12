@@ -9,6 +9,8 @@ export default function Product() {
 
   const [product, setProduct] = useState([])
 
+  const inStock = product.availabilityStatus === 'In Stock'
+
   const getProduct = async () => {
     const request = await fetch(`https://dummyjson.com/products/${id}`)
     const data = await request.json()
@@ -30,10 +32,16 @@ export default function Product() {
         <div className="w-full lg:w-1/2 flex flex-col gap-10">
           <h1 className="text-3xl font-bold capitalize text-gray-900">{product.title}</h1>
           <div className={`flex items-center gap-4 tracking-wide ${product.price > 70 ? 'justify-end flex-row-reverse' : ''}`}>
-            {product.price > 70 && (
-              <p className="text-sm bg-red-100 text-red-500 font-semibold px-3 py-1 rounded-full">
-                -{product.discountPercentage}%
+            {!inStock ? (
+              <p className="text-sm bg-red-100 text-red-500 uppercase font-semibold px-3 py-1 rounded-full">
+                Esgotado
               </p>
+            ) : (
+              product.price > 70 && (
+                <p className="text-sm bg-red-100 text-red-500 uppercase font-semibold px-3 py-1 rounded-full">
+                  -{product.discountPercentage}%
+                </p>
+              )
             )}
             <p className={`text-xl ${product.price > 70 ? 'font-light text-gray-400 line-through' : 'font-bold text-gray-900'}`}>
               R$ {product.price}
@@ -48,8 +56,8 @@ export default function Product() {
             {product.description}
           </p>
           <div className="flex items-center gap-6 mt-4">
-            <Counter />
-            <button className="px-5 py-3 bg-black text-white rounded-full font-medium shadow-md hover:scale-105 transition cursor-pointer">
+            <Counter value={inStock} />
+            <button className={`px-5 py-3 bg-black text-white rounded-full font-medium shadow-md ${inStock ? 'hover:scale-105 transition cursor-pointer' : 'disabled bg-gray-300'}`}>
               Adicionar ao carrinho
             </button>
           </div>
