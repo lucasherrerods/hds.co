@@ -24,8 +24,8 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <li className="p-4 bg-[#F6F6F6] rounded-xl flex flex-col items-center justify-center gap-4 cursor-pointer transition-all duration-300 shadow-lg hover:scale-105 hover:shadow-lg">
-      <Link to={`/products/${product.id}`}>
+    <li>
+      <Link to={`/products/${product.id}`} className="p-4 bg-[#F6F6F6] rounded-xl flex flex-col items-center justify-center gap-4 cursor-pointer transition-all duration-300 shadow-lg hover:scale-105 hover:shadow-lg">
         <img src={product.thumbnail} alt={product.title} className="h-44 object-container" />
         <p className="text-sm tracking-wider">{product.title}</p>
         <div className="flex items-center w-full gap-2">
