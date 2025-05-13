@@ -4,6 +4,7 @@ import Header from '../../components/Header'
 import Counter from '../../components/Counter'
 import Fade from '../../components/Fade'
 import Reviews from '../../components/Reviews'
+import RelatedProducts from '../../components/RelatedProducts'
 
 export default function Product() {
   const { id } = useParams()
@@ -21,7 +22,7 @@ export default function Product() {
 
   useEffect(() => {
     getProduct()
-  }, [])
+  }, [id])
 
   return (
     <Fade>
@@ -65,6 +66,7 @@ export default function Product() {
         </div>
       </div>
       <Reviews product={product} />
+      <RelatedProducts product={product} />
     </Fade>
   )
 
