@@ -1,8 +1,15 @@
 import { Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
-export default function Footer() {
+export default function Footer({ theme }) {
+  const [mode, setMode] = useState('dark')
+
+  useEffect(() => {
+    setMode(theme)
+  }, [])
+
   return (
-    <footer className="pt-12 pb-6">
+    <footer className={`mt-20 pt-12 pb-6 ${mode ? 'bg-black text-white' : ''}`}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
           <div>
@@ -56,13 +63,13 @@ export default function Footer() {
               Redes Sociais
             </h4>
             <div className="flex gap-4">
-              <div className="border p-2 rounded-full hover:bg-black hover:text-white transition cursor-pointer">
+              <div className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
                 <Facebook className="w-5 h-5" />
               </div>
-              <div className="border p-2 rounded-full hover:bg-black hover:text-white transition cursor-pointer">
+              <div className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
                 <Instagram className="w-5 h-5" />
               </div>
-              <div className="border p-2 rounded-full hover:bg-black hover:text-white transition cursor-pointer">
+              <div className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
                 <Phone className="w-5 h-5" />
               </div>
             </div>

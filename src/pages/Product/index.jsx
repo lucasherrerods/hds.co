@@ -5,6 +5,7 @@ import Counter from '../../components/Counter'
 import Fade from '../../components/Fade'
 import Reviews from '../../components/Reviews'
 import RelatedProducts from '../../components/RelatedProducts'
+import Footer from '../../components/Footer'
 
 export default function Product() {
   const { id } = useParams()
@@ -67,6 +68,7 @@ export default function Product() {
       </div>
       <Reviews product={product} />
       <RelatedProducts product={product} />
+      <Footer theme={'dark'} />
     </Fade>
   )
 
