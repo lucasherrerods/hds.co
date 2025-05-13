@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Header from '../../components/Header'
 import Counter from '../../components/Counter'
 import Fade from '../../components/Fade'
+import Reviews from '../../components/Reviews'
 
 export default function Product() {
   const { id } = useParams()
@@ -63,6 +64,7 @@ export default function Product() {
           </div>
         </div>
       </div>
+      <Reviews product={product} />
     </Fade>
   )
 
