@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 import Header from '../../components/Header'
 import Counter from '../../components/Counter'
 import Fade from '../../components/Fade'
@@ -11,6 +12,8 @@ export default function Product() {
   const { id } = useParams()
 
   const [product, setProduct] = useState([])
+
+  const { addToCart } = useContext(CartContext)
 
   const inStock = product.availabilityStatus === 'In Stock'
 
@@ -60,7 +63,7 @@ export default function Product() {
           </p>
           <div className="flex items-center gap-6 mt-4">
             <Counter value={inStock} />
-            <button className={`px-5 py-3 bg-black text-white rounded-full font-medium shadow-md ${inStock ? 'hover:scale-105 transition cursor-pointer' : 'disabled bg-gray-300'}`}>
+            <button onClick={() => addToCart(product)} className={`px-5 py-3 bg-black text-white rounded-full font-medium shadow-md ${inStock ? 'hover:scale-105 transition cursor-pointer' : 'disabled bg-gray-300'}`}>
               Adicionar ao carrinho
             </button>
           </div>
