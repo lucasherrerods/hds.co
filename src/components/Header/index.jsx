@@ -1,7 +1,11 @@
 import { Search, Heart, ShoppingCart, User } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { CartContext } from '../../contexts/CartContext'
+import { useContext } from 'react'
 
 export default function Header() {
+  const { productsCart } = useContext(CartContext)
+
   return (
     <div className='w-full h-20 flex items-center justify-around'>
       <div className='flex items-center gap-14'>
@@ -28,8 +32,11 @@ export default function Header() {
         </ul>
         <div className='flex items-center gap-6 text-gray-600'>
           <Heart className='cursor-pointer hover:text-indigo-600 transition' />
-          <Link to={'/cart'}>
+          <Link to={'/cart'} className='relative'>
             <ShoppingCart className='cursor-pointer hover:text-indigo-600 transition' />
+            <span className="absolute -top-2 -right-2 bg-indigo-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+              {productsCart.length}
+            </span>
           </Link>
           <User className='cursor-pointer hover:text-indigo-600 transition' />
         </div>

@@ -5,7 +5,7 @@ import { CartContext } from "../../contexts/CartContext"
 import { Trash } from "lucide-react"
 
 export default function Cart() {
-  const { productsCart } = useContext(CartContext)
+  const { productsCart, removeCart } = useContext(CartContext)
 
   const subTotal = productsCart.reduce((acc, item) => acc + item.price, 0)
 
@@ -53,7 +53,7 @@ export default function Cart() {
                       )}
                     </div>
                   </div>
-                  <Trash size={18} className="absolute right-4 top-4 text-red-500 font-bold cursor-pointer transition-all duration-200 hover:-translate-y-1" />
+                  <Trash onClick={() => removeCart(item)} size={18} className="absolute right-4 top-4 text-red-500 font-bold cursor-pointer transition-all duration-200 hover:-translate-y-1" />
                 </li>
               ))}
             </ul>
@@ -64,7 +64,7 @@ export default function Cart() {
           <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200 space-y-4">
             <div className="flex justify-between text-gray-600 text-sm">
               <span>Subtotal</span>
-              <span>R$ {subTotal}</span>
+              <span>R$ {subTotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-gray-600 text-sm">
               <span>Desconto</span>
@@ -73,7 +73,7 @@ export default function Cart() {
             <hr className="my-2" />
             <div className="flex justify-between text-gray-900 font-semibold text-base">
               <span>Total</span>
-              <span>R$ {subTotal - discount()}</span>
+              <span>R$ {(subTotal - discount()).toFixed(2)}</span>
             </div>
             <button className="w-full mt-4 text-white bg-black rounded-lg cursor-pointer transition duration-300 hover:scale-105 py-2 font-medium ">
               Finalizar compra
