@@ -1,12 +1,15 @@
 import { Search, Heart, ShoppingCart, User } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   return (
     <div className='w-full h-20 flex items-center justify-around'>
       <div className='flex items-center gap-14'>
-        <h1 className='font-extrabold tracking-widest uppercase text-3xl'>
-          Hds.co
-        </h1>
+        <Link to={'/'}>
+          <h1 className='font-extrabold tracking-widest uppercase text-3xl cursor-pointer'>
+            Hds.co
+          </h1>
+        </Link>
         <div className="relative">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" />
           <input
@@ -25,7 +28,9 @@ export default function Header() {
         </ul>
         <div className='flex items-center gap-6 text-gray-600'>
           <Heart className='cursor-pointer hover:text-indigo-600 transition' />
-          <ShoppingCart className='cursor-pointer hover:text-indigo-600 transition' />
+          <Link to={'/cart'}>
+            <ShoppingCart className='cursor-pointer hover:text-indigo-600 transition' />
+          </Link>
           <User className='cursor-pointer hover:text-indigo-600 transition' />
         </div>
       </div>
