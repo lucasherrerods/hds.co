@@ -16,7 +16,7 @@ export default function Product() {
   const [product, setProduct] = useState([])
 
   const { addToCart } = useContext(CartContext)
-  const { addToFavorites } = useContext(FavoriteProducts)
+  const { favorites, toggleFavorite } = useContext(FavoriteProducts)
 
   const inStock = product.availabilityStatus === 'In Stock'
 
@@ -41,7 +41,7 @@ export default function Product() {
         <div className="w-full lg:w-1/2 flex flex-col gap-10">
           <div className='flex items-center gap-20'>
             <h1 className="text-3xl font-bold capitalize text-gray-900">{product.title}</h1>
-            <Heart onClick={() => addToFavorites(product)} className='cursor-pointer hover:text-indigo-600 transition' />
+            <Heart onClick={() => toggleFavorite(product)} className={`cursor-pointer transition ${favorites.some((item) => item.id === product.id) ? 'fill-indigo-600 hover:opacity-80' : 'hover:text-indigo-600'}`} />
           </div>
           <div className={`flex items-center gap-4 tracking-wide ${product.price > 70 ? 'justify-end flex-row-reverse' : ''}`}>
             {!inStock ? (

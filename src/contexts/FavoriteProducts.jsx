@@ -12,16 +12,23 @@ export function FavoriteProductsProvider({ children }) {
     localStorage.setItem('favorites', JSON.stringify(favorites))
   }, [favorites])
 
-  const addToFavorites = (product) => {
-    setFavorites((prev) => [...prev, product])
-  }
+  const toggleFavorite = (product) => {
+    setFavorites((prev) => {
+      const isFavorite = prev.some((item) => item.id === product.id)
 
-  const removeFavorite = (product) => {
-    setFavorites((prev) => prev.filter((item) => item.id !== product.id))
+      if (isFavorite) {
+        //Remove se ja estiver nos favoritos
+        return prev.filter((item) => item.id !== product.id)
+      } else {
+        //Adiciona se ainda não estiver
+        return [...prev, product]
+      }
+
+    })
   }
 
   return (
-    <FavoriteProducts.Provider value={{ favorites, addToFavorites, removeFavorite }}>
+    <FavoriteProducts.Provider value={{ favorites, toggleFavorite }}>
       {children}
     </FavoriteProducts.Provider>
   )
