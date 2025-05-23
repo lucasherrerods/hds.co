@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
+import { Heart } from 'lucide-react'
 import { CartContext } from '../../contexts/CartContext'
+import { FavoriteProducts } from '../../contexts/FavoriteProducts'
 import Header from '../../components/Header'
 import Counter from '../../components/Counter'
 import Fade from '../../components/Fade'
@@ -14,6 +16,7 @@ export default function Product() {
   const [product, setProduct] = useState([])
 
   const { addToCart } = useContext(CartContext)
+  const { addToFavorites } = useContext(FavoriteProducts)
 
   const inStock = product.availabilityStatus === 'In Stock'
 
@@ -36,7 +39,10 @@ export default function Product() {
           <img src={product.thumbnail} alt={product.title} className="object-cover w-2/3" />
         </div>
         <div className="w-full lg:w-1/2 flex flex-col gap-10">
-          <h1 className="text-3xl font-bold capitalize text-gray-900">{product.title}</h1>
+          <div className='flex items-center gap-20'>
+            <h1 className="text-3xl font-bold capitalize text-gray-900">{product.title}</h1>
+            <Heart onClick={() => addToFavorites(product)} className='cursor-pointer hover:text-indigo-600 transition' />
+          </div>
           <div className={`flex items-center gap-4 tracking-wide ${product.price > 70 ? 'justify-end flex-row-reverse' : ''}`}>
             {!inStock ? (
               <p className="text-sm bg-red-100 text-red-500 uppercase font-semibold px-3 py-1 rounded-full">
