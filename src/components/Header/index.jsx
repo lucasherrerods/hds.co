@@ -1,5 +1,5 @@
 import { Search, Heart, ShoppingCart, User } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { CartContext } from '../../contexts/CartContext'
 import { FavoriteProducts } from '../../contexts/FavoriteProducts'
 import { useContext, useState } from 'react'
@@ -9,6 +9,9 @@ export default function Header() {
   const { favorites, toggleFavorite } = useContext(FavoriteProducts)
 
   const [showFavorites, setShowFavorites] = useState(false)
+
+  const location = useLocation()
+  const isActive = (path) => location.pathname === path
 
   return (
     <div className='w-full h-20 flex items-center justify-around'>
@@ -27,12 +30,23 @@ export default function Header() {
           />
         </div>
       </div>
-      <div className='flex items-center gap-14'>
+      <div className='flex items-center gap-24'>
         <ul className='hidden md:flex items-center gap-14 text-sm font-medium text-gray-700'>
-          <li className='cursor-pointer font-semibold hover:text-indigo-600 transition'>Home</li>
-          <li className='cursor-pointer hover:text-indigo-600 transition'>Sobre</li>
-          <li className='cursor-pointer hover:text-indigo-600 transition'>Contato</li>
-          <li className='cursor-pointer hover:text-indigo-600 transition'>Blog</li>
+          <li className={`cursor-pointer font-semibold transition ${isActive('/') ? 'border-b-2 border-indigo-500 text-indigo-600 font-medium' : 'hover:text-indigo-600 transition-colors'}`}>
+            <Link to={'/'}>
+              Home
+            </Link>
+          </li>
+          <li className={`cursor-pointer font-semibold transition ${isActive('/offers') ? 'border-b-2 border-indigo-500 text-indigo-600 font-medium' : 'hover:text-indigo-600 transition-colors'}`}>
+            <Link to={'/offers'}>
+              Ofertas
+            </Link>
+          </li>
+          <li className={`cursor-pointer font-semibold transition ${isActive('/about') ? 'border-b-2 border-indigo-500 text-indigo-600 font-medium' : 'hover:text-indigo-600 transition-colors'}`}>
+            <Link to={'/about'}>
+              Sobre
+            </Link>
+          </li>
         </ul>
         <div className='flex items-center gap-6 text-gray-600'>
           <div className='relative group'>
