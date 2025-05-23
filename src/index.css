@@ -4,6 +4,6 @@
   font-family: "Inter", sans-serif;
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   width: 0px;
 }
