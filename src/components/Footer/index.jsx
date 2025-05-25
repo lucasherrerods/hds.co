@@ -1,4 +1,5 @@
-import { Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react'
+import { Linkedin, Instagram, Phone, Github, Mail, MapPin } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 export default function Footer({ theme }) {
@@ -26,16 +27,19 @@ export default function Footer({ theme }) {
             </h4>
             <ul className="space-y-2">
               <li className="font-light hover:font-bold transition cursor-pointer">
-                Home
+                <Link to={'/'}>
+                  Home
+                </Link>
               </li>
               <li className="font-light hover:font-bold transition cursor-pointer">
-                Sobre
+                <Link to={'/offers'}>
+                  Ofertas
+                </Link>
               </li>
               <li className="font-light hover:font-bold transition cursor-pointer">
-                Contato
-              </li>
-              <li className="font-light hover:font-bold transition cursor-pointer">
-                Blog
+                <Link to={'/about'}>
+                  Sobre
+                </Link>
               </li>
             </ul>
           </div>
@@ -50,7 +54,7 @@ export default function Footer({ theme }) {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-5 h-5 font-bold" />
-                <span className="font-light">contato@hdsco.com</span>
+                <span className="font-light">lucasherrerosilva.lh@gmail.com</span>
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-5 h-5 font-bold" />
@@ -62,17 +66,23 @@ export default function Footer({ theme }) {
             <h4 className="text-lg font-semibold mb-4">
               Redes Sociais
             </h4>
-            <div className="flex gap-4">
-              <div className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
-                <Facebook className="w-5 h-5" />
-              </div>
-              <div className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
-                <Instagram className="w-5 h-5" />
-              </div>
-              <div className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
-                <Phone className="w-5 h-5" />
-              </div>
-            </div>
+            <ul className="flex gap-4">
+              <li className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
+                <Link to={'https://www.linkedin.com/in/lucasherrero/'} target='blank'>
+                  <Linkedin className="w-5 h-5" />
+                </Link>
+              </li>
+              <li className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
+                <Link>
+                  <Instagram className="w-5 h-5" />
+                </Link>
+              </li>
+              <li className={`border p-2 rounded-full transition cursor-pointer ${mode ? 'hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>
+                <Link to={'https://github.com/lucasherrerods'} target='blank'>
+                  <Github className="w-5 h-5" />
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="border-t border-gray-800 pt-6 text-center font-medium">
