@@ -69,7 +69,7 @@ export default function Product() {
           </p>
           <div className="flex items-center gap-6 mt-4">
             <Counter value={inStock} />
-            <button onClick={() => addToCart(product)} className={`px-5 py-3 bg-black text-white rounded-full font-medium shadow-md ${inStock ? 'hover:scale-105 transition cursor-pointer' : 'disabled bg-gray-300'}`}>
+            <button disabled={!inStock} onClick={() => addToCart(product)} className={`px-5 py-3 bg-black text-white rounded-full font-medium shadow-md ${inStock ? 'hover:scale-105 transition cursor-pointer' : 'bg-gray-300'}`}>
               Adicionar ao carrinho
             </button>
           </div>
