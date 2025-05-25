@@ -2,7 +2,7 @@ import { Search, Heart, ShoppingCart, User, Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { CartContext } from '../../contexts/CartContext'
 import { FavoriteProducts } from '../../contexts/FavoriteProducts'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 
 export default function Header() {
   const { productsCart } = useContext(CartContext)
@@ -13,6 +13,23 @@ export default function Header() {
 
   const location = useLocation()
   const isActive = (path) => location.pathname === path
+
+  useEffect(() => {
+    // Insere o título respectivo da página atual
+    if (location.pathname === '/offers') {
+      document.title = 'HDS.CO | Ofertas'
+    } else if (location.pathname === '/about') {
+      document.title = 'HDS.CO | Sobre'
+    } else if (location.pathname === '/cart') {
+      document.title = 'HDS.CO | Carrinho'
+    } else if (location.pathname.startsWith('/category')) {
+      document.title = 'HDS.CO | Categorias'
+    } else if (location.pathname.startsWith('/products')) {
+      document.title = 'HDS.CO | Produtos'
+    } else {
+      document.title = 'HDS.CO | Home'
+    }
+  }, [location]) // Executa sempre que a URL mudar
 
   return (
     <div className='w-full h-20 flex items-center justify-around relative'>
